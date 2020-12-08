@@ -73,8 +73,5 @@ public class hairdresser extends JFrame{
         center.add(rightCenter);
         
         
-        
-        
-        
     }
 }
