@@ -34,6 +34,21 @@ public class view extends JFrame {
     JFrame f4;
     JFrame f7;
     
+    JTextField tEmail;
+    JTextField tPassword;
+    
+    JTextField tName;
+    JTextField tSurname;
+    JTextField tEmail1;
+    JTextField tPhone;
+    JTextField tPass;
+    JTextField tLoc;
+    JLabel location;
+    
+    boolean visible;
+    JLabel info;
+    JRadioButton r2;
+    JRadioButton r1;
     //login frame
     public  void login() {
     //frame
@@ -66,8 +81,8 @@ public class view extends JFrame {
         central1.setLayout(centralGrid);
         JLabel email = new JLabel ("Email:");
         JLabel password = new JLabel ("Password:");
-        JTextField tEmail = new JTextField();
-        JTextField tPassword = new JTextField();
+        tEmail = new JTextField();
+        tPassword = new JTextField();
         centerPanel.add(central1);
         central1.setBorder(new EmptyBorder(70,0,0,0)); //padding
             email.setFont(tFont2);
@@ -132,15 +147,19 @@ public class view extends JFrame {
     center.setLayout(gridcenter);
    
     
-    JLabel info = new JLabel("I am registering as:");
+    info = new JLabel("I am registering as:");
     info.setFont(tFont2);
     center.add(info);
     
     JPanel center3 = new JPanel();
     GridLayout grid2 = new GridLayout(1,2);
-    JRadioButton r1 = new JRadioButton("Costumer");
+    r1 = new JRadioButton("Costumer");
+    r1.addActionListener(controller);
+    r1.setActionCommand("r1");
     r1.setFont(tFont2);
-    JRadioButton r2 = new JRadioButton("Hairdresser");
+    r2 = new JRadioButton("Hairdresser");
+    r2.addActionListener(controller);
+    r2.setActionCommand("r2");
     r2.setFont(tFont2);
     ButtonGroup group1 = new ButtonGroup();
     
@@ -152,27 +171,29 @@ public class view extends JFrame {
     
     center.add(center3);
     JLabel name = new JLabel("Name:");
-    JTextField tName = new JTextField();
+    tName = new JTextField();
     name.setFont(tFont2);
     
     JLabel surname = new JLabel("Surname:");
-    JTextField tSurname = new JTextField();
+    tSurname = new JTextField();
     surname.setFont(tFont2);
     
     JLabel email = new JLabel("Email:");
-    JTextField tEmail = new JTextField();
+    tEmail1 = new JTextField();
     email.setFont(tFont2);
     
     JLabel phone = new JLabel("Phone:");
-    JTextField tPhone = new JTextField();
+    tPhone = new JTextField();
     phone.setFont(tFont2);
     
     JLabel pass = new JLabel("Password:");
-    JTextField tPass = new JTextField();
+    tPass = new JTextField();
     pass.setFont(tFont2);
     
-    JLabel location = new JLabel("Location:");
-    JTextField tLoc = new JTextField();
+    location = new JLabel("Location:");
+    location.setVisible(visible);
+    tLoc = new JTextField();
+    tLoc.setVisible(visible);
     pass.setFont(tFont2);
     
     center.add(name);
@@ -180,7 +201,7 @@ public class view extends JFrame {
     center.add(surname);
     center.add(tSurname);
     center.add(email);
-    center.add(tEmail);
+    center.add(tEmail1);
     center.add(phone);
     center.add(tPhone);
     center.add(pass);

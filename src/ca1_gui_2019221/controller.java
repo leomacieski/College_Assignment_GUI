@@ -17,9 +17,12 @@ import javax.swing.JOptionPane;
 public class controller implements ActionListener {
 
     view view;
+    model model;
+    
     
     public controller (){
       this.view = new view(this);
+      this.model = new model();
     }
     
     @Override
@@ -32,22 +35,86 @@ public class controller implements ActionListener {
     }
         //login action
         if(e.getActionCommand().equals("bLogin")){
-            System.out.println("logged in");
-            view.f1.dispatchEvent(new WindowEvent(view.f1, WindowEvent.WINDOW_CLOSING));
-            view.costumer();
+            System.out.println("logged in as customer");
+            
+            String email;
+            String password;
+            
+            userlogin userlogin;
+            boolean result;
+            
+            email = view.tEmail.getText();
+            password = view.tPassword.getText();
+            userlogin = new userlogin(email, password);
+            
+            result = model.login(userlogin);
+            if(result){
+                System.out.println("working");
+                view.f1.dispatchEvent(new WindowEvent(view.f1, WindowEvent.WINDOW_CLOSING));
+                view.costumer();
+            }
+            //hairdresser
+            else if (!result){ 
+                System.out.println("hairdresser");
+            email = view.tEmail.getText();
+            password = view.tPassword.getText();
+            userlogin = new userlogin(email, password);
+            
+            result = model.hairdresser(userlogin);
+            if(result){
+                System.out.println("working");
+                view.f1.dispatchEvent(new WindowEvent(view.f1, WindowEvent.WINDOW_CLOSING));
+                view.hairdresser();
+            }
+            }
+            
         }
         //register page
         if(e.getActionCommand().equals("b1")){
+           
             System.out.println("registered");
+            
+            String name = view.tName.getText();
+            String surname = view.tSurname.getText();
+            String emailreg = view.tEmail1.getText();
+            String phone = view.tPhone.getText();
+            String password = view.tPass.getText();
+            
+            userlogin userreg = new userlogin(name, surname, emailreg, phone, password);
+            
+            boolean result = model.registrationc(userreg);
+            String query = "INSERT INTO customer (name, surname, email, phone, password)"+ "VALUES('"+name+ "','"+surname+"','"+emailreg+"','"+phone+"','"+password+"');";
+            System.out.println(query);
+            
+            System.out.println("working");
+            view.f1.dispatchEvent(new WindowEvent(view.f1, WindowEvent.WINDOW_CLOSING));
+            view.costumer();
             view.f2.dispatchEvent(new WindowEvent(view.f2, WindowEvent.WINDOW_CLOSING));
             view.login();
             JOptionPane.showMessageDialog(this.view, "Your account has been successfully created!");
         }
+            
         if(e.getActionCommand().equals("b2")){
             System.out.println("back to the login screen");
             view.f2.dispatchEvent(new WindowEvent(view.f2, WindowEvent.WINDOW_CLOSING));
             view.login();
         }
+        
+        if(e.getActionCommand().equals("r2")){
+            view.visible = true;
+            view.location.setVisible(view.visible);
+            view.tLoc.setVisible(view.visible);
+        }
+        
+        if(e.getActionCommand().equals("r1")){
+            view.visible = false;
+            view.location.setVisible(view.visible);
+            view.tLoc.setVisible(view.visible);
+        }
+        
+        
+        
+        
         
         //logout button
         if(e.getActionCommand().equals("logout")){
@@ -80,5 +147,4 @@ public class controller implements ActionListener {
         
         
 }
-
 }
